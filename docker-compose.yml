@@ -1,0 +1,6 @@
+services:
+  librarysystem.api:
+    image: ${DOCKER_REGISTRY-}librarysystemapi
+    build:
+      context: .
+      dockerfile: src/LibrarySystem.Api/Dockerfile
