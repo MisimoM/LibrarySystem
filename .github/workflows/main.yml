@@ -1,0 +1,29 @@
+name: LibrarySystem Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
+      - name: Install dependencies
+        run: dotnet restore ./LibrarySystem.sln
+
+      - name: Build project
+        run: dotnet build ./LibrarySystem.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test ./LibrarySystem.sln --configuration Release --no-restore --no-build
